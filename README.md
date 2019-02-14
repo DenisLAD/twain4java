@@ -1,5 +1,5 @@
 ## Twain Java Library
-Java library for Window x86 и x64. 
+Java library for Windows x86 и x64. 
 
 ## Tested on
 - [x] Kyocera Exosys M2040dn (NET, USB)
