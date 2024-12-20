@@ -67,7 +67,7 @@ public class TwainCapability {
 
         cp.Cap = (short) cap;
         cp.ConType = (short) contype;
-        cp.Container = 0l;
+        cp.Container = 0L;
 
         TwainUtils.setINT16(capability, 0, cap);
         TwainUtils.setINT16(capability, 2, contype);
@@ -139,8 +139,12 @@ public class TwainCapability {
     }
 
     public static void dumpHex(byte[] bytes) {
-        for (int i = 0; i < bytes.length; i++) {
-            System.out.print(String.format("%02x", bytes[i]));
+        if (null == bytes) {
+            System.out.print("null");
+            return;
+        }
+        for (byte aByte : bytes) {
+            System.out.print(String.format("%02x", aByte));
         }
     }
 
@@ -188,7 +192,7 @@ public class TwainCapability {
     }
 
     public void setCurrentValue(boolean v) throws TwainException {
-        setCurrentValue(new Boolean(v));
+        setCurrentValue(Boolean.valueOf(v));
     }
 
     public void setCurrentValue(int v) throws TwainException {
@@ -256,6 +260,7 @@ public class TwainCapability {
                         break;
                 }
             } catch (TwainException e) {
+                e.printStackTrace();
             }
         }
         return (TwainCapability[]) caps.toArray(new TwainCapability[0]);
