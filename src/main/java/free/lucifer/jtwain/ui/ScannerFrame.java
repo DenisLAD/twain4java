@@ -297,10 +297,6 @@ public class ScannerFrame extends javax.swing.JFrame {
                 ts.setState(3);
             }
 
-//            if (!TwainScanner.getScanner().getMetadata().getSource().isDeviceOnline()) {
-//                System.out.println("Device is not online: " + val);
-//                return;
-//            }
             scanners.setEnabled(false);
             getCapList.setEnabled(false);
             selectScanner.setEnabled(false);

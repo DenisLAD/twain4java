@@ -72,6 +72,9 @@ public abstract class TwainContainer {
     }
 
     private int intValue(Object obj) throws TwainException {
+        if (null == obj) {
+            return 0;
+        }
         if (obj instanceof Number) {
             return ((Number) obj).intValue();
         } else if (obj instanceof Boolean) {

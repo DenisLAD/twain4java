@@ -15,19 +15,20 @@
  */
 package free.lucifer.jtwain;
 
+import com.sun.jna.Native;
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.User32;
+import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.platform.win32.WinGDI;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.platform.win32.WinUser;
 import free.lucifer.jtwain.exceptions.TwainException;
 import free.lucifer.jtwain.libs.Kernel32;
 import free.lucifer.jtwain.libs.Win32Twain;
 import free.lucifer.jtwain.libs.Win32Twain.TW_IDENTITY;
 import free.lucifer.jtwain.transfer.TwainMemoryTransfer;
 import free.lucifer.jtwain.variable.TwainContainer;
-import com.sun.jna.Pointer;
-import com.sun.jna.Native;
-import com.sun.jna.platform.win32.User32;
-import com.sun.jna.platform.win32.WinDef;
-import com.sun.jna.platform.win32.WinGDI;
-import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.platform.win32.WinUser;
+
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.IndexColorModel;
@@ -41,14 +42,13 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
  * @author lucifer
  */
 public class Twain {
 
     // Based on http://www.twain.org/wp-content/uploads/2017/04/TWAIN.H.h
     public static final String[] ImageFileFormatExts = {
-        ".tiff", ".pict", ".bmp", ".xbm", ".jpeg", ".fpx", ".tiff", ".png", ".spiff", ".exif"
+            ".tiff", ".pict", ".bmp", ".xbm", ".jpeg", ".fpx", ".tiff", ".png", ".spiff", ".exif"
     };
     static public final int STATE_UNDEFINED = 0;
     static public final int STATE_PRESESSION = 1;
@@ -350,7 +350,7 @@ public class Twain {
     public static final int SWP_NOSIZE = 1;
 
     protected static Kernel32 kernel32;
-//    protected static User32 user32;
+    //    protected static User32 user32;
     protected static Win32Twain twain;
     protected static String libraryName;
 
@@ -371,7 +371,7 @@ public class Twain {
         map.put("CAP_CUSTOMBASE", 0x8000);
         /* Base of custom capabilities */
 
- /* all data sources are REQUIRED to support these caps */
+        /* all data sources are REQUIRED to support these caps */
         map.put("CAP_XFERCOUNT", 0x0001);
 
         /* image data sources are REQUIRED to support these caps */
@@ -561,7 +561,7 @@ public class Twain {
         map.put(0x8000, "CAP_CUSTOMBASE");
         /* Base of custom capabilities */
 
- /* all data sources are REQUIRED to support these caps */
+        /* all data sources are REQUIRED to support these caps */
         map.put(0x0001, "CAP_XFERCOUNT");
 
         /* image data sources are REQUIRED to support these caps */
@@ -1244,6 +1244,7 @@ public class Twain {
             return TWRC_NOTDSEVENT;
         }
     }
+
     protected static Map<Integer, Object> callMapper = new ConcurrentHashMap<>();
 
     private static void ntrigger(Object caller, int cmd) {
